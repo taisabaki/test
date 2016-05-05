@@ -22,7 +22,7 @@ include($_SERVER['DOCUMENT_ROOT'].'/webroot/default.html');
 
 $a = ob_get_clean();
 
-echo $_SERVER['DOCUMENT_ROOT'];
+echo $a;
 
 
 
