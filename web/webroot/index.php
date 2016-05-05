@@ -16,9 +16,13 @@
 //session_start();
 //App::run($_SERVER['REQUEST_URI']);
 
-include(dirname(__FILE__).DIRECTORY_SEPARATOR.'common.php');
+ob_start();
 
-echo dirname(__FILE__).DIRECTORY_SEPARATOR.'common.php';
+include(dirname(__FILE__).DIRECTORY_SEPARATOR.'default.html');
+
+$a = ob_get_clean();
+
+echo $a;
 
 
 
