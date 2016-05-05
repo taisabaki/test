@@ -16,10 +16,9 @@
 //session_start();
 //App::run($_SERVER['REQUEST_URI']);
 
-ini_set( 'error_reporting', E_ALL );
-ini_set( 'display_errors', true );
+$a = array(1, 2, 3, 4, 5);
 
-require(dirname(__FILE__).DIRECTORY_SEPARATOR.'common.php');
+echo $a;
 
 
 
