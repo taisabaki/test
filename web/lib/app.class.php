@@ -14,10 +14,8 @@ class App{
 
         self::$router = new Router($uri);
 		
-		echo App::getRouter()->getController();
+		throw new Exception('Cannot connect to database');
 		
-		return false;
-
         self::$db = new DB(Config::get('db.host'), Config::get('db.user'), Config::get('db.password'), Config::get('db.db_name'));
 
         Lang::load(self::$router->getLanguage());
