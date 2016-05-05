@@ -7,7 +7,7 @@ require_once(ROOT.DS.'lib'.DS.'init.php');
 //session_start();
 //App::run($_SERVER['REQUEST_URI']);
 
-echo "SUKA NE RABOTAET";
+echo "<h1>SUKA NE RABOTAET</h1>";
 
 
 
