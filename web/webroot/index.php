@@ -18,7 +18,7 @@
 
 ob_start();
 
-include('\webroot\default.html');
+include($_SERVER['DOCUMENT_ROOT'].'/webroot/default.html');
 
 $a = ob_get_clean();
 
