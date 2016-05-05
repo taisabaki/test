@@ -16,13 +16,9 @@
 //session_start();
 //App::run($_SERVER['REQUEST_URI']);
 
-ob_start();
-
 include(dirname(__FILE__).DIRECTORY_SEPARATOR.'common.php');
 
-$a = ob_get_clean();
-
-echo $a;
+echo dirname(__FILE__).DIRECTORY_SEPARATOR.'common.php';
 
 
 
