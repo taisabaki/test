@@ -18,7 +18,9 @@
 
 $a = array(1, 2, 3, 4, 5);
 
-echo $a;
+foreach($a){
+	echo $b;
+}
 
 
 
