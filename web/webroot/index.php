@@ -18,7 +18,7 @@
 
 ob_start();
 
-require(dirname(__FILE__).DIRECTORY_SEPARATOR.'default.html');
+echo "picdariki, pizdariki, pizdariki";
 
 $a = ob_get_clean();
 
