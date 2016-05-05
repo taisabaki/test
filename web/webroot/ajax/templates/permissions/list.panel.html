@@ -1,0 +1,16 @@
+<div class = "panel">
+    <div class = "panel-heading" id = "<?=$data['panel-heading']['id']?>" role = "tab">
+        <div class = "accordion-button user-select-none collapsed" data-year = "<?=$data['accordion-button']['data-year']?>" data-toggle = "collapse" data-parent = "<?=$data['accordion-button']['data-parent']?>" data-target = "<?=$data['accordion-button']['data-target']?>" aria-controls = "<?=$data['accordion-button']['aria-controls']?>" aria-expanded = "false">
+            <span class = "accordion-icon"><span class = "glyphicon glyphicon-triangle-right"></span></span>
+            <span class = "accordion-button-text"><?=$data['accordion-button']['text']?></span>
+            <span class = "docs-count"><?=$data['accordion-button']['docs-count']?></span>
+        </div>
+    </div>
+    <div class = "panel-collapse collapse" role = "tabpanel" id = "<?=$data['tabpanel']['id']?>" aria-labelledby = "<?=$data['tabpanel']['aria-labelledby']?>">
+        <ul class = "list-group border-rect" data-year = "<?=$data['accordion-button']['data-year']?>">
+            <?php foreach ($data['list-group'] as $item ) {?>
+            <?=$item?>
+            <?php } ?>
+        </ul>
+    </div>
+</div>

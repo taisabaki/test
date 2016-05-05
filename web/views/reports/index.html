@@ -1,0 +1,182 @@
+<?php if ( count ($data['report_menu']['main_list']) ) { ?>
+
+<div id = "report-menu">
+    <h1 class = "title">Параметры отчета</h1>
+    <div class = "panel panel-primary">
+
+        <div class = "panel-body">
+            <table class = "table" style = "margin-bottom: 0">
+
+                <thead style = "font-family: Georgia,Times,sans-serif;">
+                <tr>
+                    <th colspan="<?php echo $data['report_menu']['volume']['cell_unit'];?>">
+                        <input type="radio" id = "report-option-NPP" class="report-menu-unit" name = "report_option" value = "NPP"
+                               aria-controls = "checkbox-unit" checked>
+                        <label for="report-option-NPP">Энергоблок</label>
+                    </th>
+                    <th colspan = "2"><label>Условия выполнения</label></th>
+                </tr>
+
+                </thead>
+
+                <tbody>
+                <tr>
+                    <td colspan="<?php echo $data['report_menu']['volume']['cell_unit'];?>">
+                        <a role = "button" class = "report-menu-unit checkall" radio-class = "report-menu-unit"><span class = "glyphicon glyphicon-ok"></span> Все</a>
+
+                        <div class="dropdown" style = "display:inline; margin-left:20px">
+                            <a role = "button" class="dropdown-toggle" id="report-menu-npp-dropdown" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                                <span class = "glyphicon glyphicon-exclamation-sign"></span> АЭС<sub><span class="caret"></span></sub>
+                            </a>
+                            <ul class="dropdown-menu" aria-labelledby="report-menu-npp-dropdown">
+                                <?php foreach ($data['report_menu']['npps'] as $unit) {?>
+                                <li><a class = "report-menu-unit check-by-npp" radio-class = "report-menu-unit"><?php echo $unit; ?></a></li>
+                                <?php } ?>
+                            </ul>
+                        </div>
+                    </td>
+                    <td colspan = "2">
+                        <a role = "button" class = "report-menu-condition checkall"><span class = "glyphicon glyphicon-ok"></span> Все</a>
+                    </td>
+                </tr>
+                <tr>
+                    <td>
+                        <?php $loop = 1;?>
+                        <?php foreach ( $data['report_menu']['main_list'] as $unit => $pms ) { ?>
+
+                        <?php if ($loop == $data['report_menu']['volume']['multiplicity'] + 1) { ?>
+                    </td>
+                    <td>
+                        <?php $loop = 1; ?>
+                        <?php } ?>
+                        <div class = "checkbox checkbox-unit">
+                            <label class = "label checkbox-unit">
+                                <input type="checkbox" class = "report-menu-unit checkbox-unit"
+                                       toggle-aria = "#unit-<?php echo $data['report_menu']['ids_by_unit'][$unit];?>" unit-id = "<?php echo $data['report_menu']['ids_by_unit'][$unit];?>" >
+                                <span class = "report-menu-unit-title"><?php echo $unit; ?></span>
+                                <select class = "report-menu-unit-pm-select checkbox-unit hidden" id = "unit-<?php echo $data['report_menu']['ids_by_unit'][$unit];?>" >
+                                    <?php foreach ($pms as $pm) { ?>
+                                    <option><?php echo $pm; ?></option>
+                                    <?php } ?>
+                                </select>
+                            </label>
+                        </div>
+                        <?php $loop++ ;?>
+                        <?php } ?>
+                    </td>
+                    <td>
+                        <div class = "checkbox">
+                            <label class = "label">
+                                <input type="checkbox" class = "report-menu-condition" execstate = "2">
+                                <span>Выполненные</span>
+                            </label>
+                        </div>
+                        <div class = "checkbox">
+                            <label class = "label">
+                                <input type="checkbox" class = "report-menu-condition" execstate = "1">
+                                <span>На стадии выполнения</span>
+                            </label>
+                        </div>
+                        <div class = "checkbox">
+                            <label class = "label">
+                                <input type="checkbox" class = "report-menu-condition" execstate = "0">
+                                <span>Не выполненные</span>
+                            </label>
+                        </div>
+                    </td>
+                    <td>
+                        <div class = "checkbox">
+                            <label class = "label">
+                                <input type="checkbox" class = "report-menu-condition-term">
+                                <span><b>Срок : </b></span>
+                                <input type="text" name = "report-term" value = "<?php echo date('d-m-Y');?>" readonly/>
+                            </label>
+                        </div>
+                    </td>
+                </tr>
+                <tr>
+                    <td colspan="<?php echo $data['report_menu']['volume']['cell_unit'];?>">
+                        <a role = "button" class = "report-menu-unit uncheckall"><span class = "glyphicon glyphicon-remove"></span> Отменить все</a>
+                    </td>
+                    <td colspan = "2">
+                        <a role = "button" class = "report-menu-condition uncheckall"><span class = "glyphicon glyphicon-remove"></span> Отменить все</a>
+                    </td>
+                </tr>
+                </tbody>
+            </table>
+            <table class = "table">
+                <thead style = "font-family: Georgia,Times,sans-serif;">
+                <tr>
+                    <th>
+                        <input type="radio" id = "report-option-PM" class="report-menu-pm" name = "report_option" value = "PM"
+                               aria-controls = "checkbox-pm">
+                        <label for="report-option-PM" class = "report-option">ППР</label>
+                    </th>
+                </tr>
+                </thead>
+                <tbody>
+                <tr>
+                    <td>
+                        <a role = "button" class = "report-menu-pm checkall" radio-class = "report-menu-pm"><span class = "glyphicon glyphicon-ok"></span> Все</a>
+                        <a role = "button" class = "report-menu-pm uncheckall" style = "margin-left: 20px">
+                            <span class = "glyphicon glyphicon-remove"></span> Отменить все
+                        </a>
+
+                    </td>
+                </tr>
+                <tr>
+                    <td>
+
+                        <?php foreach ( $data['report_menu']['pm_tables'] as $pm ) { ?>
+                        <?php $pm = str_replace('pm', '', $pm);?>
+                        <div class = "checkbox checkbox-pm pull-left" style = "width:178px; margin-top: 0 !important;">
+                            <label class = "label checkbox-pm">
+                                <input type="checkbox" class = "report-menu-pm checkbox-pm" toggle-aria = "#pm-<?php echo $pm; ?>" disabled>
+                                <span class = "report-menu-pm-title"><?php echo $pm; ?></span>
+                            </label>
+                            <label class = "label label-tip hidden" style = "padding-left: 0 !important; cursor: pointer" toggle-aria = "#pm-<?php echo $pm; ?>">
+                                <span class = "glyphicon glyphicon-info-sign"></span>
+                            </label>
+                            <div class = "report-menu-pm-unit-drop hidden" id = "pm-<?php echo $pm; ?>">
+                                <?php foreach ($data['report_menu']['units_by_pm'][$pm] as $unit) { ?>
+                                <div class = "checkbox checkbox-pm-unit">
+                                    <label class="label">
+                                        <input type = "checkbox" class = "checkbox-pm-unit" unit-id ="<?php echo $unit; ?>"/>
+                                        <span class = "report-menu-unit-title"><?php echo $data['report_menu']['unit_by_id'][$unit]; ?></span>
+                                    </label>
+                                </div>
+                                <?php } ?>
+
+                                <div class = "checkbox checkbox-pm-unit" style = "margin-left: 0 !important;">
+                                    <label class="label pm-units-select" style = "cursor: pointer !important;" toggle-aria = "#pm-<?php echo $pm; ?>" >
+                                        <span class = "glyphicon glyphicon-ok" style = "margin-left: 0 !important;"> Выбрать</span>
+                                    </label>
+                                    <label class="label pm-units-cancel" style = "cursor: pointer !important;" toggle-aria = "#pm-<?php echo $pm; ?>">
+                                        <span class = "glyphicon glyphicon-remove" style = "margin-left: 0 !important;"> Закрыть</span>
+                                    </label>
+                                </div>
+                            </div>
+                        </div>
+                        <?php } ?>
+                    </td>
+                </tr>
+                <tr>
+                    <td>
+                        <button type = "button" id = "all-generate" class = "btn btn-default btn-xs generate" style = "margin-top: 20px" >
+                            <span class = "glyphicon glyphicon-list-alt"></span> Генерировать
+                        </button>
+
+                    </td>
+                </tr>
+                </tbody>
+            </table>
+        </div>
+    </div>
+
+</div>
+<?php } else { ?>
+<div class = "alert alert-warning" style = "height: 100px; margin-top: 20px">
+    В базе данных не содержится ни единого протокола.<br/> Чтобы внести протокол в базу данных, перейдите к
+    <a href="/newdocument">форме внесения документов в БД</a>.
+</div>
+<?php } ?>

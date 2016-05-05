@@ -1,0 +1,178 @@
+<?php if ( !empty($data['report']) ) { ?>
+<div id = "report" style = "font-family: 'Times New Roman',Verdana,serif; font-size: 11pt !important;">
+
+
+    <!--reported by units-->
+    <?php if($data['flag'] == 'npp') { ?>
+    <?php foreach ($data['report'] as $unit => $rows) { ?>
+    <table class = "table table-bordered table-condensed report-table" >
+        <thead>
+        <tr>
+            <td colspan="<?php echo ((count($data['exec-params']) > 1) ? 6 : 5); ?>">
+                <div class = "title" style="text-align: right"><span style = "font-size: 9pt; position:relative; top:12px;">Дата: <?php echo date('d.m.Y'); ?></span></div>
+                <hr/>
+                <h4><?php echo $data['title'][0];?></h4>
+                <?php if(!empty($data['title'][1])) { ?>
+                <h4 style = "text-align: right; font-size: 11pt !important;"><i><?php echo $data['title'][1];?></i></h4>
+                <?php } ?>
+            </td>
+        </tr>
+        <tr>
+            <th style = "text-align: center; vertical-align: top; min-width: 45px">№<br/>п/п</th>
+            <th style = "text-align: center; vertical-align: top">Условие</th>
+            <th style = "text-align: center; vertical-align: top">Срок</th>
+            <th style = "text-align: center; vertical-align: top">Ответственный исполнитель</th>
+            <?php if ( count($data['exec-params']) > 1 ) { ?>
+            <th style = "text-align: center; vertical-align: top">Выполнение</th>
+            <?php } ?>
+            <th style = "text-align: center; vertical-align: top">Состояние выполнения</th>
+        </tr>
+        </thead>
+
+        <tbody>
+
+
+        <tr>
+            <td colspan = "<?php echo (count($data['exec-params']) > 1) ? 6 : 5 ; ?>">
+                <label class = "label" style = "color: black; font-size: 13pt !important;">
+                    <b><?php echo ($data['model']->getUnitById($unit)).' ППР-'.$data['selected'][$unit]; ?></b>
+                </label>
+            </td>
+        </tr>
+        <?php foreach ($rows as $row => $columns) { ?>
+        <tr>
+            <td>
+                <div style = "text-align: left"><?php echo (!empty($columns['par'])) ? htmlspecialchars($columns['par']) : 'Нет данных.';?></div>
+            </td>
+            <td style = "width: 25%">
+                <div style = "text-align: justify"><?php echo (!empty($columns['content'])) ? htmlspecialchars($columns['content']) : 'Нет данных.';?></div>
+            </td>
+            <td style = "width: 105px">
+                <div style = "text-align: center"><?php echo (!empty($columns['term'])) ? htmlspecialchars($data['model']->convertDate($columns['term'])) : 'Нет данных.';?></div>
+            </td>
+            <td>
+                <div><?php echo (!empty($columns['executive'])) ? htmlspecialchars($columns['executive']) : 'Нет данных.';?></div>
+            </td>
+            <?php if ( count($data['exec-params']) > 1 ) { ?>
+            <td>
+                <div style = "text-align: center"><?php echo htmlspecialchars($data['model']->getExecstate($columns['execstate'])['table']); ?></div>
+            </td>
+            <?php } ?>
+            <td style = "width: 30%">
+                <div style = "text-align: justify"><?php echo (!empty($columns['state'])) ? htmlspecialchars($columns['state']) : 'Нет данных.';?></div>
+            </td>
+        </tr>
+        <?php } ?>
+        <?php } ?>
+        </tbody>
+    </table>
+
+    <?php } ?>
+    <!-- reported by pm -->
+    <?php if($data['flag'] == 'pm') { ?>
+    <?php foreach ($data['report'] as $pm => $units) { ?>
+    <?php foreach ($units as $unit => $rows) { ?>
+    <table class = "table table-bordered table-condensed report-table" >
+        <thead>
+        <tr>
+            <td colspan="<?php echo ((count($data['exec-params']) > 1) ? 6 : 5); ?>">
+                <div class = "title" style="text-align: right"><span style = "font-size: 9pt; position:relative;">Дата: <?php echo date('d.m.Y'); ?></span></div>
+                <hr/>
+                <h4><?php echo $data['title'][0];?></h4>
+                <?php if(!empty($data['title'][1])) { ?>
+                <h4 style = "text-align: right; font-size: 11pt !important;"><i><?php echo $data['title'][1];?></i></h4>
+                <?php } ?>
+            </td>
+        </tr>
+        <tr>
+            <th style = "text-align: center; vertical-align: top; min-width: 45px">№<br/>п/п</th>
+            <th style = "text-align: center; vertical-align: top">Условие</th>
+            <th style = "text-align: center; vertical-align: top">Срок</th>
+            <th style = "text-align: center; vertical-align: top">Ответственный исполнитель</th>
+            <?php if ( count($data['exec-params']) > 1 ) { ?>
+            <th style = "text-align: center; vertical-align: top">Выполнение</th>
+            <?php } ?>
+            <th style = "text-align: center; vertical-align: top">Состояние выполнения</th>
+        </tr>
+        </thead>
+
+        <tbody>
+
+        <tr>
+            <td colspan = "<?php echo (count($data['exec-params']) > 1) ? 6 : 5 ; ?>">
+                <label class = "label" style = "color: black; font-size: 13pt !important;">
+                    <b><?php echo ($data['model']->getUnitById($unit)).' ППР-'.$pm; ?></b>
+                </label>
+            </td>
+        </tr>
+        <?php foreach ($rows as $row => $columns) { ?>
+
+        <tr>
+            <td>
+                <div style = "text-align: left"><?php echo (!empty($columns['par'])) ? htmlspecialchars($columns['par']) : 'Нет данных.';?></div>
+            </td>
+            <td style = "width: 25%">
+                <div style = "text-align: justify"><?php echo (!empty($columns['content'])) ? htmlspecialchars($columns['content']) : 'Нет данных.';?></div>
+            </td>
+            <td style = "width: 105px">
+                <div style = "text-align: center"><?php echo (!empty($columns['term'])) ? htmlspecialchars($data['model']->convertDate($columns['term'])) : 'Нет данных.';?></div>
+            </td>
+            <td>
+                <div><?php echo (!empty($columns['executive'])) ? htmlspecialchars($columns['executive']) : 'Нет данных.';?></div>
+            </td>
+            <?php if ( count($data['exec-params']) > 1 ) { ?>
+            <td>
+                <div style = "text-align: center"><?php echo htmlspecialchars($data['model']->getExecstate($columns['execstate'])['table']); ?></div>
+            </td>
+            <?php } ?>
+            <td style = "width: 30%">
+                <div style = "text-align: justify"><?php echo (!empty($columns['state'])) ? htmlspecialchars($columns['state']) : 'Нет данных.';?></div>
+            </td>
+        </tr>
+        <?php } ?>
+        <?php } ?>
+        <?php } ?>
+        </tbody>
+    </table>
+
+    <?php } ?>
+
+</div>
+
+<style>
+    @media print{
+
+        body{
+            padding: 0;
+        }
+
+        img{
+            display: none;
+        }
+
+        body > div.container{
+            width: 100%;
+        }
+
+        div#report{
+            margin:0;
+        }
+
+        div#report table.report-table{
+            page-break-after: always;
+        }
+
+        div#report table.report-table tbody label{
+            border: none;
+        }
+
+        div#report table.report-table tr td *{
+            page-break-inside: avoid;
+        }
+
+    }
+
+</style>
+
+<?php } ?>
+        <div style = "display:none; width: 1cm" class = "cm"></div>

@@ -1,0 +1,4 @@
+<?php foreach ($data as $array) { ?>
+    <option value="<?=$array['year']?>" class = "<?=$array['archive']?>"<?=$array['disabled']?>><?=$array['year']?></option>
+<?php } ?>
+<option value="-2" style = "display: none">&#8212;</option>

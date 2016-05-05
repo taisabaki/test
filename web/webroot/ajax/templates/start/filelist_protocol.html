@@ -1,0 +1,18 @@
+<h4 style = "margin-top: 20px;" class = "text-center text-info user-select-none">Протоколы на период ППР-<?=$data['year']?></h4>
+<?php if(!count($data['files'])) { ?>
+<div class = "alert alert-warning">Нет документов</div>
+<?php } else { ?>
+<div style = "padding-left: 15px; padding-right: 15px">
+    <ul class = "list-group">
+        <?php foreach ($data['files'] as $file) { ?>
+        <li class = "list-group-item user-select-none file-link">
+            <a href="<?=$file['link']?>" style = "display: table">
+                <span class = "glyphicon glyphicon-file" style = "display: table-cell"></span>
+                <span style = "display: table-cell; text-align: justify"><?=$file['unit']?> / ППР-<?=$file['year']?> (Протокол от <?=$file['date']?>)</span>
+            </a>
+        </li>
+        <?php } ?>
+    </ul>
+</div>
+<?php } ?>
+

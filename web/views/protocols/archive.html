@@ -1,0 +1,196 @@
+<div id = "protocol-container">
+
+    <div class = "left-side">
+        <div id = "create-protocol-menu-toggle-wrap">
+            <div class = "database-header list-header btn border-rect" id = "create-protocol-menu-toggle">Протоколы</div>
+        </div>
+        <div id = "create-protocol-pad-wrap" class = "top-arrow-pad  border-shadow" style = "display: none">
+            <div id="create-protocol-pad">
+                <div class="pad-title">
+                    <h3 class="database-header pad-header user-select-none arrow-target">Создайте протокол</h3>
+                </div>
+                <div class="pad-body">
+                    <div class="ajax-form">
+
+                        <div>
+                            <label for = "protocol-unit">Блок:</label>
+                            <select class="form-control ajax-data border-rect" name="unit" id="protocol-unit">
+                                <option value="-1">Выбрать</option>
+
+                            </select>
+                        </div>
+
+                        <div>
+                            <label for="protocol-year">ППР:</label>
+                            <select class="form-control ajax-data border-rect" name="year" id="protocol-year" disabled>
+                                <option value="-1">Блок не выбран</option>
+                            </select>
+                        </div>
+
+                        <div>
+                            <label for = "protocol-date">Дата совещания:</label>
+                            <input class="form-control ajax-data border-rect" id="protocol-date" type="text" name="date" autocomplete="off" value = "<?php echo date('d.m.Y');?>"/>
+
+                        </div>
+
+                        <div>
+                            <button class="btn btn-default btn-xs border-rect btn-block" id="protocol-create" title="Создать протокол">
+                                <span class="glyphicon glyphicon-save-file"></span> Создать
+                            </button>
+                        </div>
+                    </div>
+                </div>
+
+            </div>
+        </div>
+
+        <div id = "protocol-list-wrap">
+
+        </div>
+
+    </div>
+
+    <div class = "right-side">
+
+        <div id = "protocol-form-wrap">
+            <div id = "protocol-form-header-wrap"></div>
+            <div class = "protocol-form-wrap-border">
+                <div id = "form-service-panel">
+
+                    <div class = "col-xs-2">
+                        <button class="btn-block service-button" id="protocol-save" title = "Сохранить данные"><span class = "glyphicon glyphicon-save-file"></span> Сохранить</button>
+                    </div>
+
+                    <div id = "protocol-show-articles-wrap" class = "col-xs-4">
+                        <label class = "user-select-none">Показать:</label>
+                        <select name="protocol-show-articles" id="protocol-filter" class = "border-rect fl-r">
+                            <option value="3" selected>Все</option>
+                            <option value="2">Выполненные</option>
+                            <option value="1">На стадии выполнения</option>
+                            <option value="0">Не выполненные</option>
+                        </select>
+                    </div>
+
+                    <div class = "col-xs-2">
+                        <!--<button class="btn-block service-button" id="protocol-view"><span class = "glyphicon glyphicon-save-file"></span> Открыть</button>-->
+                        <div style = "position: relative; vertical-align: middle">
+                            <button id="protocol-view" type="button" class="btn-block service-button dropdown-toggle" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                                <span class = "glyphicon glyphicon-save-file"></span> Открыть <span class="caret"></span>
+                            </button>
+                            <ul class="dropdown-menu border-rect">
+                                <li><a href="#" id="protocol-view-1">Открыть в новой вкладке</a></li>
+                                <li><a href="#" id="protocol-view-2">Открыть в новом окне</a></li>
+                            </ul>
+                        </div>
+                    </div>
+
+                    <div class = "col-xs-2">
+                        <form action="/upload.php?upload=true&action=upload&category=protocols" method="post" class = "upload-form" enctype="multipart/form-data">
+                            <button id="protocol-upload" class="btn-block service-button"  title = "Загрузить протокол"><span class = "glyphicon glyphicon-save-file"></span> Загрузить</button>
+                            <input name="file" type="file" style = "display: none"/>
+                        </form>
+
+                    </div>
+
+                    <script>
+                        $('#protocol-upload').on('click', function(){
+                            event.preventDefault();
+                            event.stopPropagation();
+                            $(this).siblings('[type = "file"]').trigger('click');
+                        });
+
+                        $('.upload-form').on('submit', function(){
+                            var current_protocol = db.form.data('current_protocol');
+                            $(this).attr('action', $(this).attr('action') + '&' + $.param({'id': current_protocol.id, 'year': current_protocol.year})) ;
+                        });
+
+                        $('[type = "file"]').on('change', function(){
+                            $('.upload-form').trigger('submit');
+                        });
+                    </script>
+
+
+
+                    <div class = "col-xs-2">
+                        <button class="btn-block service-button" id="protocol-archive" title = "Снять протокол с учета"><span class = "glyphicon glyphicon-save-file"></span> Снять</button>
+                    </div>
+
+                </div>
+
+                <div class = "protocol-input-group clr-both">
+
+                    <div class = "protocol-input-group-left pd-l-r-0">
+
+                        <div class = "nav-paragraph">
+                            <fieldset class = "">
+                                <legend class = "form-title-inner user-select-none">№ п/пп</legend>
+                                <ul class = "nav-paragraph">
+                                    <li role = "presentation active" class = "paragraph-empty" style = "display: none">
+                                        <a data-target="#par_empty" class = "no-border" aria-controls = "par_empty" role = "tab" data-toggle = "tab">ПУСТОЙ</a>
+                                    </li>
+                                </ul>
+                            </fieldset>
+                        </div>
+                    </div>
+
+                    <div class = "protocol-input-group-right pd-l-r-0">
+                        <div class = "tab-content border">
+                            <div role = "tabpanel" class = "tab-pane active" id = "par_empty"></div>
+                        </div>
+                    </div>
+                </div>
+
+                <div class = "console">
+                    <ul class="nav nav-tabs" role="tablist">
+                        <li role="presentation" class="active"><a href="#protocol-log" aria-controls="home" role="tab" data-toggle="tab">Журнал</a></li>
+                        <li role="presentation"><a href="#protocol-stats" aria-controls="profile" role="tab" data-toggle="tab">Статистика</a></li>
+
+                    </ul>
+
+                    <div class="tab-content">
+                        <div role="tabpanel" class="tab-pane active" id="protocol-log">
+                            <div class = "well-sm"></div>
+                        </div>
+                        <div role="tabpanel" class="tab-pane" id="protocol-stats">
+                            <div class = "well-sm">
+                                <table class="stats">
+                                    <tr class = "stats-2 bg-success text-success">
+                                        <td class = "stats-label">Выполненные:</td>
+                                        <td class = "stats-value"></td>
+                                        <td style = "width: 6px"></td>
+                                        <td class = "stats-label">Пункты:</td>
+                                        <td class = "stats-par-value"></td>
+                                    </tr>
+                                    <tr class = "stats-1 bg-warning text-warning">
+                                        <td class = "stats-label">На стадии выполнения:</td>
+                                        <td class = "stats-value"></td>
+                                        <td></td>
+                                        <td class = "stats-label">Пункты:</td>
+                                        <td class = "stats-par-value"></td>
+                                    </tr>
+                                    <tr class = "stats-0 bg-danger text-danger">
+                                        <td class = "stats-label">Не выполненные:</td>
+                                        <td class = "stats-value"></td>
+                                        <td></td>
+                                        <td class = "stats-label">Пункты:</td>
+                                        <td class = "stats-par-value"></td>
+                                    </tr>
+                                    <tr class = "stats-total bg-primary">
+                                        <td class = "stats-label">Всего:</td>
+                                        <td class = "stats-value"></td>
+                                        <td></td>
+                                        <td class = "stats-label">Пункты:</td>
+                                        <td class = "stats-par-value"></td>
+                                    </tr>
+                                </table>
+                            </div>
+                        </div>
+
+                    </div>
+
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+

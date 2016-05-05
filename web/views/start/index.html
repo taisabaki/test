@@ -1,0 +1,104 @@
+<div class="row start-categories">
+    <div class="col-xs-4">
+        <h3 class = "text-primary text-center text-uppercase user-select-none start-category-title">
+            Отдельные разрешения
+        </h3>
+        <a href="/permissions"></a>
+    </div>
+    <div class="col-xs-4">
+        <h3 class = "text-primary text-center text-uppercase user-select-none start-category-title">
+            Протоколы
+        </h3>
+        <a href="/protocols"></a>
+    </div>
+    <div class="col-xs-4">
+        <h3 class = "text-primary text-center text-uppercase user-select-none start-category-title">
+            Программы/План-графики
+        </h3>
+        <a href="/programs"></a>
+    </div>
+</div>
+
+<div class="start-documents">
+
+    <div class = "row">
+
+        <div class = 'col-xs-4'>
+
+            <div class="documents-list-outer" id="start-permissions-list-outer">
+                <div class="no-border border-rect">
+                    <div class="dropup">
+                        <button type="button" class = "btn btn-block btn-default" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                            Выбрать ППР
+                            <span class="caret"></span>
+                        </button>
+                        <ul id = "start-permissions-list-dropdown" class="dropdown-menu" aria-labelledby="dLabel">
+                            <?php foreach ($data['years_range'] as $year) {?>
+                            <li><a class = "no-border" data-year = "<?=$year?>" data-db = "permission">ППР-<?=$year?></a></li>
+                            <?php } ?>
+                        </ul>
+
+                    </div>
+
+                    <div id = "start-permissions-list-container">
+
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <div class = 'col-xs-4'>
+
+            <div class="documents-list-outer" id="start-protocols-list-outer">
+                <div class="no-border border-rect">
+                    <div class="dropup">
+                        <button type="button" class = "btn btn-block btn-default" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                            Выбрать ППР
+                            <span class="caret"></span>
+                        </button>
+                        <ul id = "start-protocols-list-dropdown" class="dropdown-menu" aria-labelledby="dLabel">
+                            <?php foreach ($data['years_range'] as $year) {?>
+                            <li><a class = "no-border" data-year = "<?=$year?>" data-db = "protocol">ППР-<?=$year?></a></li>
+                            <?php } ?>
+                        </ul>
+
+                    </div>
+
+                    <div id = "start-protocols-list-container">
+
+                    </div>
+
+                </div>
+
+
+            </div>
+        </div>
+
+        <div class = 'col-xs-4'>
+
+            <div class="documents-list-outer" id="start-programs-list-outer">
+                <div class="no-border border-rect">
+                    <div class="dropup">
+                        <button type="button" class = "btn btn-block btn-default" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                            Выбрать ППР
+                            <span class="caret"></span>
+                        </button>
+                        <ul id = "start-programs-list-dropdown" class="dropdown-menu" aria-labelledby="dLabel">
+                            <?php foreach ($data['years_range'] as $year) {?>
+                            <li><a class = "no-border" data-year = "<?=$year?>" data-db = "program">ППР-<?=$year?></a></li>
+                            <?php } ?>
+                        </ul>
+
+                    </div>
+
+                    <div id = "start-programs-list-container">
+
+                    </div>
+                </div>
+            </div>
+        </div>
+
+    </div>
+
+
+</div>

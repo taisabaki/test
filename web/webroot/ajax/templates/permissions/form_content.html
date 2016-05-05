@@ -1,0 +1,102 @@
+<div class = "tab-pane" role = "tabpanel" id = "<?=$data['content']['id']?>">
+    <table class = "input-group-table">
+        <tbody>
+        <tr>
+            <td>
+                <legend class = "form-title-inner user-select-none rest-content-legend-padding">Подразделение </legend>
+            </td>
+            <td>
+                <select class = "ajax-data" name = "executive">
+
+                    <?php foreach($data['departments'] as $row) { ?>
+                    <option <?php if ($data['content']['executive'] == $row['id']) {?>selected<?php } ?> value="<?=$row['id']?>" title = "<?=$row['full_name']?>"><?=$row['name']?></option>
+                    <?php } ?>
+                </select>
+            </td>
+
+
+            <td>
+                <legend class = "form-title-inner user-select-none">Срок </legend>
+            </td>
+            <td>
+                <input type="text" name = "term" class = "ajax-data" value = "<?php echo $data['content']['term'] == '00.00.0000' ? '' : $data['content']['term']; ?>"/>
+            </td>
+        </tr>
+        <tr>
+            <td colspan = "3"></td>
+            <td style = "width: 200px;">
+                <table class = "rep-sect-class-title">
+                    <thead>
+                    <tr>
+                        <th class = "user-select-none" title = "Учитывать в отчетах">Учет</th>
+                        <th class = "user-select-none" title = "Раздел отдельного разрешения">Рзд</th>
+                        <th class = "user-select-none" title = "Классификатор отраслевого условия">Кл-ф</th>
+                    </tr>
+                    </thead>
+                </table>
+            </td>
+        </tr>
+        <tr>
+            <td>
+                <legend class = "form-title-inner user-select-none rest-content-legend-padding">Стадия выполнения </legend>
+            </td>
+
+            <td>
+                <select class="ajax-data" name = "status">
+                    <option<?php if($data['content']['status'] == 2) { ?> selected<?php } ?> value = "2">Выполнено</option>
+                    <option<?php if($data['content']['status'] == 1) { ?> selected<?php } ?> value = "1">На стадии выполнения</option>
+                    <option<?php if($data['content']['status'] == 0) { ?> selected<?php } ?> value = "0">Не выполнено</option>
+                </select>
+            </td>
+            <td></td>
+            <td>
+                <table class = "rep-sect-class-body">
+                    <tbody>
+                    <tr>
+                        <td>
+                            <select name="report" class = "ajax-data">
+                                <option value="1"<?php if ($data['content']['report'] == 1) { ?> selected<?php } ?>>Да</option>
+                                <option value="0"<?php if ($data['content']['report'] == 0) { ?> selected<?php } ?>>Нет</option>
+                            </select>
+                        </td>
+                        <td>
+                            <select name="section" class = "ajax-data">
+                                <option value="1"<?php if ($data['content']['section'] == 1) { ?> selected<?php } ?>>1</option>
+                                <option value="2"<?php if ($data['content']['section'] == 2) { ?> selected<?php } ?>>2</option>
+                                <option value="3"<?php if ($data['content']['section'] == 3) { ?> selected<?php } ?>>3</option>
+                            </select>
+                        </td>
+                        <td>
+                            <select name="class" class = "ajax-data">
+                                <option value="-1" style = "display: none"></option>
+                                <?php foreach($data['classes'] as $row) { ?>
+                                <option <?php if ($data['content']['class'] == $row['id']) {?>selected<?php } ?> value="<?=$row['id']?>" title = "<?=$row['term']?>"><?=$row['id']?></option>
+                                <?php } ?>
+                            </select>
+                        </td>
+                    </tr>
+                    </tbody>
+                </table>
+            </td>
+        </tr>
+
+        <tr>
+            <td>
+                <legend class = "form-title-inner user-select-none rest-content-legend-padding">Условие </legend>
+            </td>
+            <td colspan="3">
+                <textarea class = "ajax-data no-resize" name = "content"><?=$data['content']['content']?></textarea>
+            </td>
+        </tr>
+        <tr>
+            <td>
+                <legend class = "form-title-inner user-select-none rest-content-legend-padding">Состояние выполнения </legend>
+            </td>
+            <td colspan="3">
+                <textarea class = "ajax-data no-resize" name = "state"><?=$data['content']['state']?></textarea>
+            </td>
+        </tr>
+        </tbody>
+    </table>
+
+</div>
