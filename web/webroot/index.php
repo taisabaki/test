@@ -18,7 +18,7 @@
 
 ob_start();
 
-echo "picdariki, pizdariki, pizdariki";
+include('\webroot\default.html');
 
 $a = ob_get_clean();
 
