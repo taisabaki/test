@@ -22,7 +22,7 @@ include('\webroot\default.html');
 
 $a = ob_get_clean();
 
-echo $a;
+echo ROOT;
 
 
 
