@@ -16,14 +16,10 @@
 //session_start();
 //App::run($_SERVER['REQUEST_URI']);
 
-ob_start();
+ini_set( 'error_reporting', E_ALL );
+ini_set( 'display_errors', true );
 
-include($_SERVER['DOCUMENT_ROOT'].'/webroot/default.html');
-
-$a = ob_get_clean();
-
-echo $a;
-
+require(dirname(__FILE__).DIRECTORY_SEPARATOR.'common.php');
 
 
 
