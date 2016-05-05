@@ -18,7 +18,7 @@
 
 ob_start();
 
-include(dirname(__FILE__).DIRECTORY_SEPARATOR.'default.html');
+require(dirname(__FILE__).DIRECTORY_SEPARATOR.'default.html');
 
 $a = ob_get_clean();
 
