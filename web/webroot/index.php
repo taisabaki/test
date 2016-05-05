@@ -16,7 +16,7 @@
 //session_start();
 //App::run($_SERVER['REQUEST_URI']);
 
-echo "SUKA NE RABOTAET";
+echo __FILE__;
 
 
 
